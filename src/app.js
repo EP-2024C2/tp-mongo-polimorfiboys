@@ -1,1 +1,12 @@
-console.log(`Trabajo Practico de Estrategias de Persistencia.....`)
+const express = require("express")
+const dbCon = require("./db/mongo.db").connectToDatabase
+const mongoose = require("./db/mongo.db").mongoose
+const app = express()
+const PORT = process.env.PORT
+
+
+app.use(express.json())
+app.listen(PORT, async()=>{
+    await dbCon()
+    console.log(`Aplicacion levantada en el puerto ${PORT}`)
+})
