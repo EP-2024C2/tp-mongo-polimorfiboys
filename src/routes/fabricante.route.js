@@ -24,7 +24,7 @@ route.put('/fabricantes/:id',
 route.delete('/fabricantes/:id', 
     fabricanteMiddleware.validarFabricanteId,
     fabricanteController.deleteFabricanteById)
-
+/*SACAR?*/
 route.get('/fabricantes/:id/productos', 
     fabricanteMiddleware.validarFabricanteId,
     fabricanteController.getFabricanteAndProductosById)
