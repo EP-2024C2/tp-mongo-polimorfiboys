@@ -1,4 +1,6 @@
-const { Componente, Fabricante, Producto} = require('../mongoSchema')
+const Componente = require('../mongoSchema/componenteSchema')
+const Producto = require('../mongoSchema/productoSchema')
+const Fabricante = require('../mongoSchema/fabricanteSchema')
 const controller = {}
 
 const getAllComponentes = async(req,res)=>{

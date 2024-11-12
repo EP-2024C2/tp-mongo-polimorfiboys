@@ -1,11 +1,11 @@
 const {Router} = require('express')
 const route = Router()
 const productoController = require('../controllers/producto.controller')
-const schemaValidator = require('../middlewares/schema.validator')
+const schemaValidator = require('../middlewares/schemaValidator.middlewares')
 const productoSchema = require('../schemas/producto.schema')
-const fabricanteSchema = require('../schemas/fabricanta.schema')
+const fabricanteSchema = require('../schemas/fabricante.schema')
 const componenteSchema = require('../schemas/componente.schema')
-const productoMiddleware = require('../middlewares/producto.middleware')
+const productoMiddleware = require('../middlewares/validateID.middlewares')
 
 route.get('/productos',
     productoController.getAllProductos)

@@ -19,4 +19,4 @@ const componenteSchema = new mongoose.Schema({
 }*/)
 
 const Componente = mongoose.model("Componente", componenteSchema)
-modele.exports = Componente
+module.exports = Componente

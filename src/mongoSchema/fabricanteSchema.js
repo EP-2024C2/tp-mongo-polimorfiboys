@@ -36,4 +36,4 @@ const fabricanteSchema = new mongoose.Schema({
 }*/)
 
 const Fabricante = mongoose.model("Fabricante", fabricanteSchema)
-modele.exports = Fabricante
+module.exports = Fabricante

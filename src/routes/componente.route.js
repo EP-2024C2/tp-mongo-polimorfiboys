@@ -1,8 +1,8 @@
 const {Router} = require('express')
 const route = Router()
 const componenteController = require('../controllers/componente.controller')
-const schemaValidator = require('../middlewares/schema.validator')
-//const componenteSchema = require('../schemas/componente.schema')
+const schemaValidator = require('../middlewares/schemaValidator.middlewares')
+const componenteSchema = require('../schemas/componente.schema')
 const componenteMiddleware = require('../middlewares/validateID.middlewares')
 
 route.get('/componentes', 
@@ -13,7 +13,7 @@ route.get('/componentes/:id',
     componenteController.getComponenteById)
 
 route.post('/componentes', 
-    //schemaValidator(componenteSchema), 
+    schemaValidator(componenteSchema), 
     componenteController.postComponente)
 
 route.put('/componentes/:id', 
