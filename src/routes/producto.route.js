@@ -36,10 +36,10 @@ route.post('/productos/:id/fabricantes',
     schemaValidator(fabricanteSchema),
     productoController.addFabricanteToProducto)
 
-    /*SACAR YA FIGURA EN PRODUCTOS ID DIRECTAMENTE*/
+    /*SACAR YA FIGURA EN PRODUCTOS ID DIRECTAMENTE - LE PUSE LA RUTE QUE TRAE EL PRODUCTO POR ID*/ 
 route.get('/productos/:id/componentes',
     productoMiddleware.validarProductoId,
-    productoController.getProductoAndComponentesById)
+    productoController.getProductoById)
 
 route.post('/productos/:id/componentes', 
     productoMiddleware.validarProductoId,

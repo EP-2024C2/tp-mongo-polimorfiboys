@@ -4,7 +4,7 @@ const Fabricante = require('../mongoSchema/fabricanteSchema')
 const controller = {}
 
 const getAllComponentes = async(req,res)=>{
-    const componentes = await Componente.findAll({})
+    const componentes = await Componente.find({})
     res.status(200).json(componentes)
 }
 
@@ -12,7 +12,7 @@ controller.getAllComponentes = getAllComponentes
 
 const getComponenteById = async(req,res)=>{
     const id = req.params.id
-    const componente = Componente.findByPk({_id:id})
+    const componente = Componente.findById({_id:id})
     res.status(200).json(componente)
 }
 
@@ -41,13 +41,13 @@ const updateComponente = async (req, res) => {
     const { nombre, descripcion } = req.body
     const id = req.params.id
     const componente = await Componente.findByIdAndUpdate({_id:id},
-        {$set : {nombre, descripcion}}
+        {$set : {nombre, descripcion}},{new:true}
     )
-    await componente.save()
     res.status(200).json(componente)
 }
 controller.updateComponente = updateComponente
 
+//CREO QUE NO VA
 const getProductoAndComponentesById = async (req, res) => {
     const id = req.params.id
     const componente = await Componente.findOne({
@@ -59,7 +59,6 @@ const getProductoAndComponentesById = async (req, res) => {
             }
         }
     })
-
     res.status(200).json(componente)
 }
 

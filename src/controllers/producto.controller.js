@@ -39,7 +39,7 @@ const getProductoAndFabricantesById = async (req, res) => {
 
 controller.getProductoAndFabricantesById = getProductoAndFabricantesById
 
-//REVISAR COMO HACER CORREGIR
+//REVISAR COMO HACER CORREGIR  --creo que no va -- se pone el controler de traer producto por id porque ya muestra los componentes
 const getProductoAndComponentesById = async (req, res) => {
     const id = req.params.id
     const producto = await Producto.findOne({
@@ -103,9 +103,8 @@ const addFabricanteToProducto = async (req, res) => {
 
 controller.addFabricanteToProducto = addFabricanteToProducto
 
-//REVISAR COMO HACER CORREGIR
+
 const addComponenteToProducto = async (req, res) => {
-    const { nombre, descripcion } = req.body
     const idProducto = req.params.id
     const producto = await Producto.findByIdAndUpdate(
         idProducto,

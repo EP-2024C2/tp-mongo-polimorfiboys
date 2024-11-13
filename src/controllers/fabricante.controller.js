@@ -49,18 +49,13 @@ const updateFabricante = async (req, res) => {
 }
 controller.updateFabricante = updateFabricante
 
+
+//REVISAR SI ESTA BIEN
 const getFabricanteAndProductosById = async (req, res) => {
     const id = req.params.id
-    const fabricante = await Fabricante.findOne({
-        where: {id},
-        include:{
-            model:Producto,
-            through:{
-                attributes: []
-            }
-        }
-    })
-    res.status(200).json(fabricante)
+    const fabricante = await Fabricante.findOne({_id:id})
+    const fabri = fabricante.populate("productoId")
+    res.status(200).json(fabri)
 }
 
 controller.getFabricanteAndProductosById = getFabricanteAndProductosById
