@@ -12,7 +12,7 @@ controller.getAllComponentes = getAllComponentes
 
 const getComponenteById = async(req,res)=>{
     const id = req.params.id
-    const componente = Componente.findByPk(id)
+    const componente = Componente.findByPk({_id:id})
     res.status(200).json(componente)
 }
 
@@ -30,7 +30,7 @@ controller.postComponente = postComponente
 
 const deleteComponenteById = async(req,res)=>{
     const idComponente = req.params.id
-    const r = await Producto.destroy({ where: { id: idComponente } })
+    const r = await Producto.findByIdAndDelete({_id: idComponente})
     res.status(204).json({ mensaje: `filas afectados ${r}` })
 }
 
@@ -40,9 +40,9 @@ controller.deleteComponenteById = deleteComponenteById
 const updateComponente = async (req, res) => {
     const { nombre, descripcion } = req.body
     const id = req.params.id
-    const componente = await Componente.findByPk(id)
-    componente.nombre = nombre;
-    componente.direccion = direccion;
+    const componente = await Componente.findByIdAndUpdate({_id:id},
+        {$set : {nombre, descripcion}}
+    )
     await componente.save()
     res.status(200).json(componente)
 }

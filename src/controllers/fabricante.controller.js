@@ -13,7 +13,7 @@ controller.getAllFabricantes = getAllFabricantes
 
 const getFabricanteById = async(req,res)=>{
     const id = req.params.id
-    const fabricante = Fabricante.findByPk(id)
+    const fabricante = Fabricante.findByPk({_id:id})
     res.status(200).json(fabricante)
 }
 
@@ -33,7 +33,7 @@ controller.postFabricante = postFabricante
 
 const deleteFabricanteById = async(req,res)=>{
     const idFabricante = req.params.id
-    const r = await Producto.destroy({ where: { id: idFabricante } })
+    const r = await Producto.findByIdAndDelete({_id: idFabricante })
     res.status(204).json({ mensaje: `filas afectados ${r}` })
 }
 
@@ -42,12 +42,9 @@ controller.deleteFabricanteById = deleteFabricanteById
 const updateFabricante = async (req, res) => {
     const { nombre, direccion, numeroContacto, pathImgPerfil } = req.body
     const id = req.params.id
-    const fabricante = await Fabricante.findByPk(id)
-    fabricante.nombre = nombre;
-    fabricante.direccion = direccion;
-    fabricante.numeroContacto = numeroContacto
-    fabricante.pathImgPerfil = pathImgPerfil
-    await fabricante.save()
+    const fabricante = await Fabricante.findByIdAndUpdate({_id:id},
+        {$set : {nombre, direccion, numeroContacto, pathImgPerfil}}, {new:true}
+    )
     res.status(200).json(fabricante)
 }
 controller.updateFabricante = updateFabricante
