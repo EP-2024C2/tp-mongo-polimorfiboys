@@ -4,7 +4,7 @@ const Fabricante = require('../mongoSchema/fabricanteSchema')
 const controller = {}
 
 const getAllFabricantes = async(req,res)=>{
-    const fabricantes = await Fabricante.findAll({})
+    const fabricantes = await Fabricante.find({})
     res.status(200).json(fabricantes)
 }
 
@@ -13,7 +13,7 @@ controller.getAllFabricantes = getAllFabricantes
 
 const getFabricanteById = async(req,res)=>{
     const id = req.params.id
-    const fabricante = Fabricante.findByPk({_id:id})
+    const fabricante = await Fabricante.findById({_id:id})
     res.status(200).json(fabricante)
 }
 

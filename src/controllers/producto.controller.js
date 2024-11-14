@@ -1,6 +1,7 @@
 const Componente = require('../mongoSchema/componenteSchema')
 const Producto = require('../mongoSchema/productoSchema')
 const Fabricante = require('../mongoSchema/fabricanteSchema')
+const mongoose = require('mongoose')
 const controller = {}
 
 
@@ -93,12 +94,10 @@ controller.deleteProductoById = deleteProductoById
 
 //REVISAR COMO HACER CORREGIR
 const addFabricanteToProducto = async (req, res) => {
-    const { nombre, direccion, numeroContacto, pathImgPerfil } = req.body
     const idProducto = req.params.id
-    const producto = await Producto.findByPk(idProducto)
-    const fabricante = await Fabricante.create({ nombre, direccion, numeroContacto, pathImgPerfil })
-    producto.addFabricante([fabricante])
-    res.status(201).json({ mesagge: "Fabricante agregado al producto" })
+    const nuevoFabricante = {...req.body, productos : new mongoose.Types.ObjectId(idProducto)}
+    const fabricante = await Fabricante.create(nuevoFabricante)
+    res.status(201).json(fabricante)
 }
 
 controller.addFabricanteToProducto = addFabricanteToProducto
