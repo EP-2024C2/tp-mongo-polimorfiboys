@@ -1,7 +1,8 @@
 const Componente = require('../mongoSchema/componenteSchema')
 const Producto = require('../mongoSchema/productoSchema')
 const Fabricante = require('../mongoSchema/fabricanteSchema')
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
+const mongoose = require("../db/mongo.db").mongoose;
 const { $_match } = require('../schemas/producto.schema')
 const controller = {}
 
@@ -25,32 +26,30 @@ controller.getProductoById = getProductoById
 
 //REVISAR COMO HACER CORREGIR
 const getProductoAndFabricantesById = async (req, res) => {
-    const id = req.params.id
-    const producto = await Producto.aggregate[{
-        $_match: {_id:id}
+    const id = new mongoose.Types.ObjectId(req.params.id)
+    const producto = await Producto.aggregate([{
+        $match: { _id: id }
     },
     {
         $lookup: {
             from: "Fabricante",
-            localfield: "id",
+            localField: "_id",
             foreignField: "productos",
-            as: "fabricante" 
+            as: "fabricante"
         }
     },
     {
-        $proyect: {
+        $project: {
             _id: 0,
-            nombre:1,
-            direccion:1,
-            numeroContacto:1,
-            pathImgPerfil:0,
-            "producto.nombre":1,
-            "producto.descripcion":0,
-            "producto.precio":1,
-            "producto.pathImg":0
+            nombre: 1,
+            descripcion: 1,
+            precio: 1,
+            "fabricante._id":1,
+            "fabricante.nombre": 1,
+            "fabricante.direccion": 1,
+            "fabricante.numeroContacto": 1,
         }
-    }]
-    console.log(producto)
+    }])
     res.status(200).json(producto)
 }
 

@@ -25,15 +25,12 @@ const fabricanteSchema = new mongoose.Schema({
         minlength: 1,
         maxlength: 255
     },
-    productos: {
-        type: Schema.Types.ObjectId,
+    productos: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Producto",
         //required: true,
-    }
-},
-    {
-        collection: "fabricantes",
-    })
+    }]
+})
 
 const Fabricante = mongoose.model("Fabricante", fabricanteSchema)
 module.exports = Fabricante
