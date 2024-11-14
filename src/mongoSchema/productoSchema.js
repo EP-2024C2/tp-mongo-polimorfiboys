@@ -5,13 +5,13 @@ const productoSchema = new mongoose.Schema({
         type: Schema.Types.String,
         required: true,
         minlength:3,
-        maxlenght:255
+        maxlength:255
     },
     descripcion:{
         type: Schema.Types.String,
         required: true,
         minlength:3,
-        maxlenght:255
+        maxlength:255
     },
     precio:{
         type: Schema.Types.Number,
@@ -21,11 +21,11 @@ const productoSchema = new mongoose.Schema({
         type: Schema.Types.String,
         required:true,
         minlength: 1,
-        maxlenght: 255
+        maxlength: 255
     },
     componente:[
         {
-            nombre: { type: String, required:true, minlength: 3, maxlenght: 255},
+            nombre: { type: String, required:true, minlength: 3, maxlength: 255},
             descripcion: { type: String,required:true, minlength: 3, maxlenght: 255}
         }
     ]

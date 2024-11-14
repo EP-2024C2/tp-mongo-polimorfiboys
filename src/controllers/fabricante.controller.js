@@ -13,7 +13,7 @@ controller.getAllFabricantes = getAllFabricantes
 
 const getFabricanteById = async(req,res)=>{
     const id = req.params.id
-    const fabricante = await Fabricante.findById({_id:id})
+    const fabricante = await Fabricante.findById({_id:id}).populate("productos")
     res.status(200).json(fabricante)
 }
 
@@ -50,12 +50,11 @@ const updateFabricante = async (req, res) => {
 controller.updateFabricante = updateFabricante
 
 
-//REVISAR SI ESTA BIEN
+//HACE LO MISMO QUE GET BY ID
 const getFabricanteAndProductosById = async (req, res) => {
     const id = req.params.id
-    const fabricante = await Fabricante.findOne({_id:id})
-    const fabri = fabricante.populate("productoId")
-    res.status(200).json(fabri)
+    const fabricante = await Fabricante.findById(id).populate("productos")
+    res.status(200).json(fabricante)
 }
 
 controller.getFabricanteAndProductosById = getFabricanteAndProductosById

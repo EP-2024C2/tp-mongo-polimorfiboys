@@ -11,29 +11,29 @@ const fabricanteSchema = new mongoose.Schema({
         type: Schema.Types.String,
         required: true,
         minlength: 3,
-        maxlenght: 255
+        maxlength: 255
     },
     numeroContacto: {
         type: Schema.Types.Number,
         required: true,
-        minlenght: 7,
-        maxlenght: 20
+        minlength: 7,
+        maxlength: 20
     },
     pathImgPerfil: {
         type: Schema.Types.String,
         required: true,
         minlength: 1,
-        maxlenght: 255
+        maxlength: 255
     },
-    productoId: {
+    productos: {
         type: Schema.Types.ObjectId,
         ref: "Producto",
         //required: true,
     }
-}
-/*{
-    collection:"fabricantes",
-}*/)
+},
+    {
+        collection: "fabricantes",
+    })
 
 const Fabricante = mongoose.model("Fabricante", fabricanteSchema)
 module.exports = Fabricante
