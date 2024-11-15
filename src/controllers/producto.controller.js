@@ -32,7 +32,7 @@ const getProductoAndFabricantesById = async (req, res) => {
     },
     {
         $lookup: {
-            from: "Fabricante",
+            from: "fabricantes",
             localField: "_id",
             foreignField: "productos",
             as: "fabricante"
@@ -40,7 +40,7 @@ const getProductoAndFabricantesById = async (req, res) => {
     },
     {
         $project: {
-            _id: 0,
+            _id: 1,
             nombre: 1,
             descripcion: 1,
             precio: 1,
@@ -83,6 +83,10 @@ controller.updateProducto = updateProducto
 
 const deleteProductoById = async (req, res) => {
     const idProducto = req.params.id
+    await Fabricante.updateMany(
+        {productos: idProducto},
+        { $pull : {productos: idProducto}}
+    )
     const r = await Producto.findByIdAndDelete({ _id: idProducto })
     res.status(204).json({ mensaje: `filas afectados ${r}` })
 }

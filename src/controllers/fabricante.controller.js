@@ -33,7 +33,7 @@ controller.postFabricante = postFabricante
 
 const deleteFabricanteById = async(req,res)=>{
     const idFabricante = req.params.id
-    const r = await Producto.findByIdAndDelete({_id: idFabricante })
+    const r = await Fabricante.findByIdAndDelete({_id: idFabricante })
     res.status(204).json({ mensaje: `filas afectados ${r}` })
 }
 

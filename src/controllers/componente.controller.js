@@ -12,7 +12,7 @@ controller.getAllComponentes = getAllComponentes
 
 const getComponenteById = async(req,res)=>{
     const id = req.params.id
-    const componente = Componente.findById({_id:id})
+    const componente = await Componente.findById({_id:id})
     res.status(200).json(componente)
 }
 
@@ -30,7 +30,7 @@ controller.postComponente = postComponente
 
 const deleteComponenteById = async(req,res)=>{
     const idComponente = req.params.id
-    const r = await Producto.findByIdAndDelete({_id: idComponente})
+    const r = await Componente.findByIdAndDelete({_id: idComponente})
     res.status(204).json({ mensaje: `filas afectados ${r}` })
 }
 
@@ -50,16 +50,10 @@ controller.updateComponente = updateComponente
 //CREO QUE NO VA
 const getProductoAndComponentesById = async (req, res) => {
     const id = req.params.id
-    const componente = await Componente.findOne({
-        where: {id},
-        include:{
-            model:Producto,
-            through:{
-                attributes: []
-            }
-        }
+    const producto = await Producto.findOne({
+        componente : {$elemMatch:{_id: id}}
     })
-    res.status(200).json(componente)
+    res.status(200).json(producto)
 }
 
 controller.getProductoAndComponentesById = getProductoAndComponentesById

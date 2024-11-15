@@ -1,32 +1,33 @@
 const mongoose = require("../db/mongo.db").mongoose;
 const { Schema } = require("mongoose");
+const Fabricante = require("./fabricanteSchema");
 const productoSchema = new mongoose.Schema({
-    nombre:{
+    nombre: {
         type: Schema.Types.String,
         required: true,
-        minlength:3,
-        maxlength:255
+        minlength: 3,
+        maxlength: 255
     },
-    descripcion:{
+    descripcion: {
         type: Schema.Types.String,
         required: true,
-        minlength:3,
-        maxlength:255
+        minlength: 3,
+        maxlength: 255
     },
-    precio:{
+    precio: {
         type: Schema.Types.Number,
         required: true
     },
-    pathImg:{
+    pathImg: {
         type: Schema.Types.String,
-        required:true,
+        required: true,
         minlength: 1,
         maxlength: 255
     },
-    componente:[
+    componente: [
         {
-            nombre: { type: String, required:true, minlength: 3, maxlength: 255},
-            descripcion: { type: String,required:true, minlength: 3, maxlenght: 255}
+            nombre: { type: String, required: true, minlength: 3, maxlength: 255 },
+            descripcion: { type: String, required: true, minlength: 3, maxlenght: 255 }
         }
     ]
 }
