@@ -4,7 +4,6 @@ const mongoose = require("./db/mongo.db").mongoose
 const app = express()
 const PORT = process.env.PORT ?? 3001
 const rutas = require('./routes')
-
 app.use(express.json())
 app.use(rutas.productoRutas)
 app.use(rutas.fabricanteRutas)
