@@ -2,7 +2,7 @@ const Componente = require('../mongoSchema/componenteSchema')
 const Producto = require('../mongoSchema/productoSchema')
 const Fabricante = require('../mongoSchema/fabricanteSchema')
 const controller = {}
-
+//prueba
 const getAllComponentes = async(req,res)=>{
     const componentes = await Componente.find({})
     res.status(200).json(componentes)
